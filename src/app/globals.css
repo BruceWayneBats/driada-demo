@@ -1,26 +1,47 @@
 @import "tailwindcss";
 
+/* Палитра светлого дерева: берёза, светлый дуб, орех для текста */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --birch: #fbf8f2;
+  --oak-50: #f5eee2;
+  --oak-100: #ede1cd;
+  --oak-200: #e0cfb3;
+  --oak-400: #c49a6c;
+  --oak-600: #9a6a3c;
+  --oak-700: #7f5530;
+  --walnut: #3a2c20;
+  --walnut-soft: #6e5b48;
+  --sage: #7d8a63;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-birch: var(--birch);
+  --color-oak-50: var(--oak-50);
+  --color-oak-100: var(--oak-100);
+  --color-oak-200: var(--oak-200);
+  --color-oak-400: var(--oak-400);
+  --color-oak-600: var(--oak-600);
+  --color-oak-700: var(--oak-700);
+  --color-walnut: var(--walnut);
+  --color-walnut-soft: var(--walnut-soft);
+  --color-sage: var(--sage);
+  --font-sans: var(--font-manrope);
+  --font-serif: var(--font-lora);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--birch);
+  color: var(--walnut);
+}
+
+::selection {
+  background: var(--oak-200);
+}
+
+summary::-webkit-details-marker {
+  display: none;
 }

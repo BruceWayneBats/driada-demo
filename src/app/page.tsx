@@ -1,69 +1,94 @@
-import Image from "next/image";
+import Link from "next/link";
+import { CategoryCard } from "@/components/ProductCard";
+import { ArrowIcon } from "@/components/Icons";
+import { WoodArt } from "@/components/WoodArt";
+import { CallButton, Container, WhatsAppButton } from "@/components/ui";
+import { categories, getProducts } from "@/content/catalog";
+import { promos } from "@/content/promo";
+import { site } from "@/content/site";
+
+const advantages = [
+  ["Натуральная древесина", "Работаем с сосной, лиственницей, липой, ясенем и дубом."],
+  ["Для частных клиентов и организаций", "Штучные изделия и оптовые партии, документы для юрлиц."],
+  ["Изготовление по размерам", "Подгоним изделие под ваш проект и интерьер."],
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <section className="border-b border-oak-100 bg-gradient-to-b from-oak-50 to-birch">
+        <Container className="grid items-center gap-10 py-14 sm:py-20 md:grid-cols-2">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sage">{site.tagline}</p>
+            <h1 className="mt-4 font-serif text-4xl font-semibold leading-[1.1] sm:text-5xl lg:text-6xl">
+              Тёплое дерево для дома и бизнеса
+            </h1>
+            <p className="mt-6 max-w-lg text-lg leading-relaxed text-walnut-soft">{site.description}</p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/catalog"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-walnut px-6 py-3.5 font-semibold text-birch hover:bg-oak-700"
+              >
+                Смотреть каталог <ArrowIcon />
+              </Link>
+              <CallButton className="bg-transparent !text-walnut ring-1 ring-oak-200 hover:!bg-oak-100" />
+            </div>
+          </div>
+          <div className="hidden overflow-hidden rounded-[2rem] md:block">
+            <WoodArt kind="furniture" seed="hero" className="h-full w-full" />
+          </div>
+        </Container>
+      </section>
+
+      <Container className="py-16 sm:py-20">
+        <div className="flex items-end justify-between gap-4">
+          <h2 className="font-serif text-3xl font-semibold sm:text-4xl">Каталог</h2>
+          <Link href="/catalog" className="hidden items-center gap-2 text-oak-700 hover:underline sm:flex">
+            Все товары <ArrowIcon />
+          </Link>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {categories.map((c) => (
+            <CategoryCard key={c.slug} category={c} count={getProducts(c.slug).length} />
+          ))}
         </div>
-      </main>
-    </div>
+      </Container>
+
+      <section className="bg-oak-50">
+        <Container className="grid gap-8 py-16 sm:grid-cols-3">
+          {advantages.map(([title, text]) => (
+            <div key={title}>
+              <div className="mb-4 h-px w-12 bg-oak-400" />
+              <h3 className="text-lg font-semibold">{title}</h3>
+              <p className="mt-2 text-walnut-soft">{text}</p>
+            </div>
+          ))}
+        </Container>
+      </section>
+
+      {promos.length > 0 && (
+        <Container className="py-16 sm:py-20">
+          <div className="rounded-3xl border border-oak-200 p-8 sm:p-10">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sage">Акция</p>
+            <h2 className="mt-3 font-serif text-2xl font-semibold sm:text-3xl">{promos[0].title}</h2>
+            <p className="mt-3 max-w-2xl text-walnut-soft">{promos[0].text}</p>
+            <Link href="/promo" className="mt-6 inline-flex items-center gap-2 font-semibold text-oak-700 hover:underline">
+              Все акции <ArrowIcon />
+            </Link>
+          </div>
+        </Container>
+      )}
+
+      <Container className="text-center">
+        <h2 className="font-serif text-3xl font-semibold">Подберём изделие под вашу задачу</h2>
+        <p className="mx-auto mt-3 max-w-xl text-walnut-soft">
+          Позвоните или напишите — расскажем о наличии, сроках и вариантах исполнения.
+        </p>
+        <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+          <CallButton />
+          <WhatsAppButton />
+        </div>
+      </Container>
+    </>
   );
 }
