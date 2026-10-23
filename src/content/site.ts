@@ -15,7 +15,7 @@ export const site = {
   tagline: "Изделия из натурального дерева",
   description:
     "Деревянная мебель, погонаж, обрезной материал, панно и лестничные элементы для организаций и частных клиентов.",
-  url: "https://driada-demo.vercel.app",
+  url: process.env.SITE_URL || "https://driada-demo.vercel.app",
   email: "info@driada.ru",
   whatsapp: "79000000000",
   phones: [
