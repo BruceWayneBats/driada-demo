@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { categories, products } from "@/content/catalog";
 import { site } from "@/content/site";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = ["", "/catalog", "/about", "/promo", "/contacts"];
   return [
