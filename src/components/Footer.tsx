@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
-import { nav, site, whatsappUrl } from "@/content/site";
+import { mainPhone, nav, site, whatsappUrl } from "@/content/site";
 
 export function Footer() {
   return (
@@ -20,10 +20,13 @@ export function Footer() {
         </nav>
 
         <div className="space-y-2 text-sm">
-          {site.phones.map((p) => (
-            <a key={p.tel} href={`tel:${p.tel}`} className="block font-semibold hover:text-oak-700">
-              {p.display}
-            </a>
+          <a href={`tel:${mainPhone.tel}`} className="block font-semibold hover:text-oak-700">
+            {mainPhone.display}
+          </a>
+          {site.branches.map((b) => (
+            <p key={b.city} className="text-walnut-soft">
+              {b.city}, {b.address}
+            </p>
           ))}
           <a href={`mailto:${site.email}`} className="block text-walnut-soft hover:text-oak-700">
             {site.email}
@@ -34,7 +37,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-oak-100 py-5 text-center text-xs text-walnut-soft">
-        © {new Date().getFullYear()} {site.name}. Информация на сайте не является публичной офертой.
+        © 2004–{new Date().getFullYear()} {site.name}. {site.legal && `${site.legal}. `}Информация на сайте не является публичной офертой.
       </div>
     </footer>
   );

@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import { WoodArt } from "@/components/WoodArt";
 import { CallButton, Container, PageTitle } from "@/components/ui";
+import { site } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "О компании",
-  description: "Компания «Дриада» — производство и продажа изделий из натурального дерева.",
+  description: "Деревообрабатывающее предприятие «Дриада» — изделия из натурального дерева с 2004 года.",
 };
 
-// ДЕМО-текст: заменить на историю компании.
 const facts = [
-  ["10+", "лет работы"],
-  ["5", "направлений продукции"],
-  ["2", "филиала"],
+  ["2004", "год основания"],
+  ["3", "торговые базы"],
+  ["4", "породы древесины"],
 ];
 
 export default function AboutPage() {
@@ -19,20 +19,20 @@ export default function AboutPage() {
     <Container>
       <PageTitle
         title="О компании"
-        lead="«Дриада» производит и продаёт изделия из натурального дерева: мебель, погонаж, обрезной материал, панно и элементы лестниц."
+        lead="Деревообрабатывающее предприятие «Дриада». С 2004 года занимаемся продажей изделий из натурального дерева."
       />
 
       <div className="grid gap-12 md:grid-cols-2">
         <div className="space-y-5 text-lg leading-relaxed text-walnut-soft">
           <p>
-            Мы работаем с частными клиентами, строительными и отделочными компаниями, мебельными мастерскими. Для
-            каждого заказа подбираем породу древесины и обработку под задачу.
+            Работаем с лиственницей, липой, сосной и елью. В ассортименте — мебель и банная мебель, погонаж, обрезной
+            материал, мебельные щиты, панно, лестничные элементы, а также масла и краски для дерева.
           </p>
           <p>
-            Древесина проходит камерную сушку, поэтому изделия сохраняют геометрию. Готовую продукцию можно забрать со
-            склада или заказать доставку.
+            У нас три торговые базы — в Набережных Челнах, Нижнекамске и Елабуге. На их территории работают арендаторы,
+            в основном магазины строительных товаров, поэтому всё нужное для стройки и ремонта можно купить в одном
+            месте.
           </p>
-          <p>Организациям предоставляем закрывающие документы и работаем по безналичному расчёту.</p>
         </div>
         <div className="overflow-hidden rounded-3xl">
           <WoodArt kind="lumber" seed="about" className="h-full w-full" />
@@ -48,6 +48,18 @@ export default function AboutPage() {
           </div>
         ))}
       </dl>
+
+      <h2 className="mt-16 font-serif text-3xl font-semibold">Наши торговые базы</h2>
+      <ul className="mt-6 space-y-3 text-lg">
+        {site.branches.map((b) => (
+          <li key={b.city}>
+            <span className="font-semibold">{b.city}</span>, {b.address} —{" "}
+            <a href={`tel:${b.phone.tel}`} className="text-oak-700 hover:underline">
+              {b.phone.display}
+            </a>
+          </li>
+        ))}
+      </ul>
 
       <div className="mt-16 text-center">
         <CallButton />

@@ -8,9 +8,9 @@ import { promos } from "@/content/promo";
 import { site } from "@/content/site";
 
 const advantages = [
-  ["Натуральная древесина", "Работаем с сосной, лиственницей, липой, ясенем и дубом."],
-  ["Для частных клиентов и организаций", "Штучные изделия и оптовые партии, документы для юрлиц."],
-  ["Изготовление по размерам", "Подгоним изделие под ваш проект и интерьер."],
+  ["С 2004 года", "Более 20 лет обрабатываем дерево и продаём изделия из натуральной древесины."],
+  ["Натуральная древесина", "Лиственница, липа, сосна и ель — подбираем породу под задачу."],
+  ["Три торговые базы", "Набережные Челны, Нижнекамск и Елабуга. На территории баз — магазины строительных товаров."],
 ];
 
 export default function Home() {
@@ -20,8 +20,9 @@ export default function Home() {
         <Container className="grid items-center gap-10 py-14 sm:py-20 md:grid-cols-2">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sage">{site.tagline}</p>
-            <h1 className="mt-4 font-serif text-4xl font-semibold leading-[1.1] sm:text-5xl lg:text-6xl">
-              Тёплое дерево для дома и бизнеса
+            <h1 className="mt-4 font-serif text-5xl font-semibold leading-[1.05] sm:text-6xl lg:text-7xl">
+              {site.name}.
+              <span className="block text-oak-600">{site.slogan}</span>
             </h1>
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-walnut-soft">{site.description}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -78,6 +79,22 @@ export default function Home() {
           </div>
         </Container>
       )}
+
+      <Container className="pb-16 sm:pb-20">
+        <h2 className="font-serif text-3xl font-semibold sm:text-4xl">Торговые базы</h2>
+        <div className="mt-8 grid gap-6 md:grid-cols-3">
+          {site.branches.map((b) => (
+            <div key={b.city} className="rounded-3xl border border-oak-200 p-7">
+              <h3 className="font-serif text-xl font-semibold">{b.city}</h3>
+              <p className="mt-2 text-walnut-soft">{b.address}</p>
+              <p className="mt-1 text-sm text-walnut-soft">{b.hours}</p>
+              <a href={`tel:${b.phone.tel}`} className="mt-4 inline-block font-semibold text-oak-700 hover:underline">
+                {b.phone.display}
+              </a>
+            </div>
+          ))}
+        </div>
+      </Container>
 
       <Container className="text-center">
         <h2 className="font-serif text-3xl font-semibold">Подберём изделие под вашу задачу</h2>

@@ -18,7 +18,7 @@ const lora = Lora({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — ${site.tagline.toLowerCase()}`,
+    default: `${site.name} — ${site.slogan.toLowerCase()}`,
     template: `%s — ${site.name}`,
   },
   description: site.description,

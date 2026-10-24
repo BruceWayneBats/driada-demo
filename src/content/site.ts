@@ -1,5 +1,5 @@
-// Контакты и общие данные компании.
-// ДЕМО: телефоны, почта и адреса — заглушки, заменить на реальные.
+// Контакты и общие данные компании (из анкеты клиента).
+// TODO: единый номер и мессенджеры — клиент пока не прислал; реквизиты юрлица — тоже.
 
 export type Phone = { label: string; display: string; tel: string };
 export type Branch = {
@@ -10,37 +10,51 @@ export type Branch = {
   mapUrl: string;
 };
 
+const map = (q: string) => `https://yandex.ru/maps/?text=${encodeURIComponent(q)}`;
+
+const branches: Branch[] = [
+  {
+    city: "Набережные Челны",
+    address: "Казанский проспект, 234А, стр. 43",
+    hours: "8:00–17:00",
+    phone: { label: "Набережные Челны", display: "+7 (8552) 44-88-00", tel: "+78552448800" },
+    mapUrl: map("Набережные Челны, Казанский проспект, 234А"),
+  },
+  {
+    city: "Нижнекамск",
+    address: "ул. Вокзальная, 5Б",
+    hours: "8:00–17:00",
+    phone: { label: "Нижнекамск", display: "+7 (8555) 84-27-27", tel: "+78555842727" },
+    mapUrl: map("Нижнекамск, ул. Вокзальная, 5Б"),
+  },
+  {
+    city: "Елабуга",
+    address: "Окружное шоссе, 11В",
+    hours: "8:00–17:00",
+    phone: { label: "Елабуга", display: "+7 (8555) 72-66-00", tel: "+78555726600" },
+    mapUrl: map("Елабуга, Окружное шоссе, 11В"),
+  },
+];
+
 export const site = {
   name: "Дриада",
-  tagline: "Изделия из натурального дерева",
+  slogan: "Дерево для жизни",
+  tagline: "Деревообрабатывающее предприятие с 2004 года",
   description:
-    "Деревянная мебель, погонаж, обрезной материал, панно и лестничные элементы для организаций и частных клиентов.",
+    "Изделия из лиственницы, липы, сосны и ели: мебель, банная мебель, погонаж, обрезной материал, мебельные щиты, панно и лестничные элементы.",
   url: process.env.SITE_URL || "https://driada-demo.vercel.app",
-  email: "info@driada.ru",
+  email: "driada2004@rambler.ru",
+  // ДЕМО: единый номер для WhatsApp / Telegram / MAX — заглушка
   whatsapp: "79000000000",
-  phones: [
-    { label: "Отдел продаж", display: "+7 (900) 000-00-00", tel: "+79000000000" },
-    { label: "Для организаций", display: "+7 (900) 000-00-01", tel: "+79000000001" },
-  ] satisfies Phone[],
-  branches: [
-    {
-      city: "Главный офис и склад",
-      address: "г. Город, ул. Лесная, 1",
-      hours: "Пн–Пт 9:00–18:00, Сб 10:00–15:00",
-      phone: { label: "Офис", display: "+7 (900) 000-00-00", tel: "+79000000000" },
-      mapUrl: "https://yandex.ru/maps/?text=ул.+Лесная,+1",
-    },
-    {
-      city: "Филиал",
-      address: "г. Город, пр. Строителей, 25",
-      hours: "Пн–Сб 9:00–17:00",
-      phone: { label: "Филиал", display: "+7 (900) 000-00-02", tel: "+79000000002" },
-      mapUrl: "https://yandex.ru/maps/?text=пр.+Строителей,+25",
-    },
-  ] satisfies Branch[],
+  // ДЕМО: единый номер с переадресацией по городам ещё не создан — пока главный номер Челнов
+  mainPhone: { label: "Единый номер", display: "+7 (8552) 44-88-00", tel: "+78552448800" } satisfies Phone,
+  phones: branches.map((b) => b.phone),
+  branches,
+  // ДЕМО: реквизиты юрлица — запросить у клиента
+  legal: "",
 };
 
-export const mainPhone = site.phones[0];
+export const mainPhone = site.mainPhone;
 
 export const whatsappUrl = (text?: string) =>
   `https://wa.me/${site.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ""}`;

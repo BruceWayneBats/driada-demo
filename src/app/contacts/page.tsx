@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { MailIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "@/components/Icons";
 import { Container, PageTitle } from "@/components/ui";
-import { site, whatsappUrl } from "@/content/site";
+import { mainPhone, site, whatsappUrl } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Контакты",
@@ -11,13 +11,13 @@ export const metadata: Metadata = {
 export default function ContactsPage() {
   return (
     <Container>
-      <PageTitle title="Контакты" lead="Звоните, пишите или приезжайте — покажем образцы." />
+      <PageTitle title="Контакты" lead="Один номер для всех городов — звонок переадресуется в ближайшую торговую базу." />
 
       <div className="grid gap-6 md:grid-cols-3">
         <div className="rounded-3xl bg-oak-50 p-7">
           <PhoneIcon className="h-6 w-6 text-oak-600" />
           <div className="mt-4 space-y-3">
-            {site.phones.map((p) => (
+            {[mainPhone].map((p) => (
               <div key={p.tel}>
                 <p className="text-sm text-walnut-soft">{p.label}</p>
                 <a href={`tel:${p.tel}`} className="text-xl font-semibold hover:text-oak-700">
@@ -39,8 +39,8 @@ export default function ContactsPage() {
         </a>
       </div>
 
-      <h2 className="mt-16 font-serif text-3xl font-semibold">Филиалы</h2>
-      <div className="mt-6 grid gap-6 md:grid-cols-2">
+      <h2 className="mt-16 font-serif text-3xl font-semibold">Торговые базы</h2>
+      <div className="mt-6 grid gap-6 md:grid-cols-3">
         {site.branches.map((b) => (
           <div key={b.address} className="rounded-3xl border border-oak-200 p-7">
             <PinIcon className="h-6 w-6 text-oak-600" />
