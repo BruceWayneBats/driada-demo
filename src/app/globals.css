@@ -31,6 +31,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* шапка липкая — при переходах не прятать под ней начало страницы */
+  scroll-padding-top: 64px;
 }
 
 body {
